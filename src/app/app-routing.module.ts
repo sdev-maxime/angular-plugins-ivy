@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AppComponent } from './app.component';
 
 // TODO: http app initializer
 const plugins = [
-   {
+  {
     route: '/one',
     chunk: 0,
     src: './src/app/plugin-one/plugin-one.module.ts',
@@ -15,6 +16,7 @@ const plugins = [
     src: './src/app/plugin-two/plugin-two.module.ts',
     name: 'PluginTwoModule',
   }
+
 ];
 const load = plugin => import(`./${plugin}/${plugin}.module`);
 declare const __webpack_require__: any;
@@ -32,7 +34,12 @@ const routes: Routes = [
     loadChildren: async () => {
       return loaderRouteModule();
     }
+  },
+  {
+      path: '**',
+      component: AppComponent
   }
+
 ];
 
 @NgModule({
